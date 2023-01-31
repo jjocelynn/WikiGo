@@ -11,9 +11,13 @@ $(function () {
 //when search button is clicked, add the input to searchHistory array and save to local storage
 $("#searchButton").click(function () {
     let location = document.querySelector("#searchInput").value;
-    searchHistory.push(location);
-    localStorage.setItem("location", JSON.stringify(searchHistory));
-    createButton(location);
+    if (searchHistory.includes(location)) {
+        //dont add anything to history
+    } else {
+        searchHistory.unshift(location);
+        localStorage.setItem("location", JSON.stringify(searchHistory));
+        createButton(location);
+    }
 })
 
 //function to display buttons
@@ -22,3 +26,10 @@ let createButton = function (locationBtn) {
     button.textContent = locationBtn;
     $("#searchHistory").append(button);
 }
+
+//clear search history button
+$("#clearHistory").click(function () {
+    searchHistory = [];
+    localStorage.setItem("location", JSON.stringify(searchHistory));
+    $("#searchHistory").text("");
+})
