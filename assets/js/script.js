@@ -1,5 +1,4 @@
 const apiKey = "pk.eyJ1IjoiaXNodmFsIiwiYSI6ImNsZGtmZHQ2bzE3Zngzb2xsZWpld25qYXEifQ.h-MDSqkuEyiG5MPawRdT9w";
-
 let searchHistory = [];
 
 // on page load, get items from local storage and display as buttons
@@ -8,11 +7,12 @@ $(function () {
     for (i = 0; i < searchHistory.length; i++) {
         createButton(searchHistory[i]);
     }
+    mapCall();
 })
 
 //when search button is clicked, add the input to searchHistory array and save to local storage
 $("#searchButton").click(function () {
-    let location = document.querySelector("#searchInput").value;
+    let location = $("#searchInput").val();
     if (searchHistory.includes(location)) {
         //dont add anything to history
     } else {
@@ -20,10 +20,12 @@ $("#searchButton").click(function () {
         localStorage.setItem("location", JSON.stringify(searchHistory));
         createButton(location);
     }
+    wikiCall(location);
+    mapCall(location);
+})
 
-    // wiki api call 
-
-    let searchTerm = $("#searchInput").val();
+// wiki api call 
+let wikiCall = function (searchTerm) {
     let apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&format=json&origin=*`;
     fetch(apiUrl)
         .then(response => response.json())
@@ -34,17 +36,16 @@ $("#searchButton").click(function () {
             } else {
                 throw new Error("No results found");
             }
-
-
         })
         .catch(error => {
             console.error(error);
             $("#wikiArticle").html("<p>No results found</p>");
         });
+}
 
-    // Map API call
+// Map API call
+let mapCall = function (location) {
     let mapboxApiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${apiKey}`;
-    console.log(mapboxApiUrl);
 
     fetch(mapboxApiUrl)
         .then(response => response.json())
@@ -63,11 +64,7 @@ $("#searchButton").click(function () {
             });
         })
         .catch(error => console.error(error));
-})
-
-
-
-
+}
 
 //function to display buttons
 let createButton = function (locationBtn) {
@@ -81,6 +78,11 @@ $("#clearHistory").click(function () {
     searchHistory = [];
     localStorage.setItem("location", JSON.stringify(searchHistory));
     $("#searchHistory").text("");
-
-
 })
+
+//adding functionality to search history buttons
+$("#searchHistory").click(function (e) {
+    let search = e.target.textContent;
+    wikiCall(search);
+    mapCall(search);
+});
