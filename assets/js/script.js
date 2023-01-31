@@ -18,6 +18,25 @@ $("#searchButton").click(function () {
         localStorage.setItem("location", JSON.stringify(searchHistory));
         createButton(location);
     }
+    
+    // wiki api call 
+
+    let searchTerm = $("#searchInput").val();
+    let apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&format=json&origin=*`;
+    fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      if (data.query.search.length > 0) {
+        let firstResult = data.query.search[0].snippet;
+        $("#wikiArticle").html(firstResult);
+      } else {
+        throw new Error("No results found");
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      $("#wikiArticle").html("<p>No results found</p>");
+    });
 })
 
 //function to display buttons
