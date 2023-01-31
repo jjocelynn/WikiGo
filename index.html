@@ -15,17 +15,19 @@
     </header>
 
     <aside id="searchContainer">
-        <input type="text" id="searchInput" placeholder="Search">
-        <button id="searchButton">Search</button>
+        <input type="text" id="searchInput" placeholder="Search a Destination">
+        <button type="button" id="searchButton">Search</button>
         <hr />
         <p id="validity"></p>
-        <ul id="searchHistory"></ul>
+        <ul id="searchHistory">Search History: </ul>
+        <button id="clearHistory">Clear History</button>
     </aside>
 
     <section id="resultsContainer">
         <div id="wikiArticle"></div>
         <div id="map"></div>
     </section>
+
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
