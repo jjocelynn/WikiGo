@@ -1,3 +1,5 @@
+const apiKey = "pk.eyJ1IjoiaXNodmFsIiwiYSI6ImNsZGtmZHQ2bzE3Zngzb2xsZWpld25qYXEifQ.h-MDSqkuEyiG5MPawRdT9w";
+
 let searchHistory = [];
 
 // on page load, get items from local storage and display as buttons
@@ -18,26 +20,54 @@ $("#searchButton").click(function () {
         localStorage.setItem("location", JSON.stringify(searchHistory));
         createButton(location);
     }
-    
+
     // wiki api call 
 
     let searchTerm = $("#searchInput").val();
     let apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&format=json&origin=*`;
     fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-      if (data.query.search.length > 0) {
-        let firstResult = data.query.search[0].snippet;
-        $("#wikiArticle").html(firstResult);
-      } else {
-        throw new Error("No results found");
-      }
-    })
-    .catch(error => {
-      console.error(error);
-      $("#wikiArticle").html("<p>No results found</p>");
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.query.search.length > 0) {
+                let firstResult = data.query.search[0].snippet;
+                $("#wikiArticle").html(firstResult);
+            } else {
+                throw new Error("No results found");
+            }
+
+
+        })
+        .catch(error => {
+            console.error(error);
+            $("#wikiArticle").html("<p>No results found</p>");
+        });
+
+    // Map API call
+    let mapboxApiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${apiKey}`;
+    console.log(mapboxApiUrl);
+
+    fetch(mapboxApiUrl)
+        .then(response => response.json())
+        .then(data => {
+            let latitude = data.features[0].center[1];
+            let longitude = data.features[0].center[0];
+
+            // Create a Mapbox map
+            mapboxgl.accessToken = apiKey;
+
+            const map = new mapboxgl.Map({
+                container: "map", // container ID
+                style: "mapbox://styles/mapbox/streets-v12", // style URL
+                center: [longitude, latitude], // starting position [lng, lat]
+                zoom: 9, // starting zoom
+            });
+        })
+        .catch(error => console.error(error));
 })
+
+
+
+
 
 //function to display buttons
 let createButton = function (locationBtn) {
@@ -51,4 +81,6 @@ $("#clearHistory").click(function () {
     searchHistory = [];
     localStorage.setItem("location", JSON.stringify(searchHistory));
     $("#searchHistory").text("");
+
+
 })
