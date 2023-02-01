@@ -97,11 +97,11 @@ let mapCall = function (location) {
                 long: longitude
             }
 
-            //if value does not already exist, add it to coordinatesHistory array and save to local storage
-            if (existingValue == "false") { 
-                coordinatesHistory.push(coordinates);
-                localStorage.setItem("coordinates", JSON.stringify(coordinatesHistory));
-            }
+            // //if value does not already exist, add it to coordinatesHistory array and save to local storage
+            // if (existingValue == "false") { 
+            //     coordinatesHistory.push(coordinates);
+            //     localStorage.setItem("coordinates", JSON.stringify(coordinatesHistory));
+            // }
 
             wikiCall(latitude, longitude);
         })
