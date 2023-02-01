@@ -20,27 +20,30 @@ $("#searchButton").click(function () {
         localStorage.setItem("location", JSON.stringify(searchHistory));
         createButton(location);
     }
-    wikiCall(location);
+    
     mapCall(location);
 })
 
 // wiki api call 
-let wikiCall = function (searchTerm) {
-    let apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&format=json&origin=*`;
+let wikiCall = function (latitude, longitude) {
+    let apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=${latitude}%7C${longitude}&gsradius=5000&gslimit=1&format=json&origin=*`;//insert lat and lon from mapCall.
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            if (data.query.search.length > 0) {
-                let firstResult = data.query.search[0].snippet;
-                $("#wikiArticle").html(firstResult);
-            } else {
-                throw new Error("No results found");
-            }
-        })
-        .catch(error => {
-            console.error(error);
-            $("#wikiArticle").html("<p>No results found</p>");
-        });
+            console.log(data)
+            let pageId = data.query.geosearch[0].pageid; // get pageid from searched location.
+            let pageIdUrl = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&pageids=${pageId}&explaintext=1&origin=*`; // put pageid in url for info to be extracted.       
+            fetch(pageIdUrl) //fetch the url with pageid sourced from apiURL
+                .then(response => response.json())
+                .then(data => {
+                    let article = data.query.pages[pageId].extract; // extract info from pageIdUrl.
+                    $("#wikiArticle").html(article); // display wiki article on page.
+                })
+                .catch(error => {
+                    console.error(error);
+                    $("#wikiArticle").html("<p>No results found</p>");
+                }); // display error message to page if search is not found.
+        })     
 }
 
 // Map API call
@@ -62,6 +65,7 @@ let mapCall = function (location) {
                 center: [longitude, latitude], // starting position [lng, lat]
                 zoom: 9, // starting zoom
             });
+            wikiCall(latitude, longitude);
         })
         .catch(error => console.error(error));
 }
@@ -83,6 +87,5 @@ $("#clearHistory").click(function () {
 //adding functionality to search history buttons
 $("#searchHistory").click(function (e) {
     let search = e.target.textContent;
-    wikiCall(search);
     mapCall(search);
 });
