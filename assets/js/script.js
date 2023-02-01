@@ -7,7 +7,6 @@ $(function () {
     for (i = 0; i < searchHistory.length; i++) {
         createButton(searchHistory[i]);
     }
-    mapCall();
 })
 
 //when search button is clicked, add the input to searchHistory array and save to local storage
