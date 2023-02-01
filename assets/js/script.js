@@ -51,6 +51,12 @@ let wikiCall = function (latitude, longitude) {
                 .then(data => {
                     let article = data.query.pages[pageId].extract; // extract info from pageIdUrl.
                     $("#wikiArticle").html(article); // display wiki article on page.
+                    // article overflow container 
+                    document.getElementById("wikiArticle").style.width = "75%";
+                    document.getElementById("wikiArticle").style.height = "9em";
+                    document.getElementById("wikiArticle").style.border = "2px solid #0038ff";
+                    document.getElementById("wikiArticle").style.overflowY = "scroll";
+                    document.getElementById("wikiArticle").style.overflowX = "hidden";
                 })
                 .catch(error => {
                     console.error(error);
@@ -127,3 +133,4 @@ $("#searchHistory").click(function (e) {
     let search = e.target.textContent;
     runCode(search);
 });
+
