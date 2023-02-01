@@ -1,5 +1,6 @@
 const apiKey = "pk.eyJ1IjoiaXNodmFsIiwiYSI6ImNsZGtmZHQ2bzE3Zngzb2xsZWpld25qYXEifQ.h-MDSqkuEyiG5MPawRdT9w";
 let searchHistory = [];
+let coordinatesHistory = [];
 
 // on page load, get items from local storage and display as buttons
 $(function () {
@@ -62,8 +63,19 @@ let mapCall = function (location) {
                 container: "map", // container ID
                 style: "mapbox://styles/mapbox/streets-v12", // style URL
                 center: [longitude, latitude], // starting position [lng, lat]
-                zoom: 9, // starting zoom
+                zoom: 15, // starting zoom
             });
+            
+            //Sizing the scale appropriately
+            let keyName = Object.keys(data.features[0]); //getting an array of object key names
+
+            if (keyName.includes("bbox")) { //checks if there is bbox (bounding box)
+                let southLat = data.features[0].bbox[0];
+                let westLon = data.features[0].bbox[1];
+                let northLat = data.features[0].bbox[2];
+                let eastLon = data.features[0].bbox[3];
+                map.fitBounds([[southLat, westLon], [northLat, eastLon]]); //setting map boundaries
+            }
             wikiCall(latitude, longitude);
         })
         .catch(error => console.error(error));
