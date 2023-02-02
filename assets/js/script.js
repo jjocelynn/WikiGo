@@ -16,12 +16,33 @@ $(function () {
 $("#searchButton").click(function () {
     let location = $("#searchInput").val();
     runCode(location);
-})
+});
+
 $("#searchInput").on("keydown", function (event) {
+    let dropdown = $("#dropdown");
+    dropdown.empty();
+    searchHistory.forEach(function (history) {
+        let button = $("<button>").text(history);
+        button.click(function () {
+            runCode(history);
+        });
+        dropdown.append(button);
+    });
+    dropdown.toggle();
     if (event.key == "Enter") { //checks if the key pressed is the enter key.
         let location = $("#searchInput").val();
         runCode(location);
     }
+});
+
+$(function () {
+    let dropdown = $("<div>").attr("id", "dropdown").css({
+        "display": "none",
+        "position": "absolute",
+        "background-color": "white",
+        "z-index": "1"
+    });
+    $("#searchInput").after(dropdown);
 });
 
 //add the input to searchHistory array and save to local storage
@@ -118,7 +139,7 @@ let mapCall = function (location) {
 let createButton = function (locationBtn) {
     let button = document.createElement("button");
     button.textContent = locationBtn;
-    $("#searchHistory").append(button);
+    //$("#searchHistory").append(button);
 }
 
 //clear search history button
