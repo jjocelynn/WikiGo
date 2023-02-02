@@ -3,6 +3,23 @@ let searchHistory = []; //saves user search histroy(to be used for local storage
 let coordinatesHistory = []; //saves searched location coordinates(to be used for local storage)
 let existingValue = "false"; //verifies if user has already searched this term
 
+//when you click on the WikiGO logo it takes you to the top
+document.querySelector("header").addEventListener("click", function () {
+    window.scrollTo(0, 0);
+});
+
+//when you click on the search button or one of the searchHistory items it takes you to the wikiArticle
+
+
+
+function scrollToWikiArticle() {
+    const wikiArticle = document.getElementById("wikiArticle");
+    window.scrollTo({
+        top: wikiArticle.offsetTop,
+        behavior: "smooth"
+    });
+}
+
 
 //when you click on the WikiGO logo it takes you to the top
 document.querySelector("header").addEventListener("click", function () {
@@ -38,11 +55,14 @@ $(function () {
 //when search button is clicked or enter key is pressed in the searchInput, run the code
 $("#searchButton").click(function () {
     let location = $("#searchInput").val();
+    scrollToWikiArticle();
     runCode(location);
-})
+});
+
 $("#searchInput").on("keydown", function (event) {
     if (event.key == "Enter") { //checks if the key pressed is the enter key.
         let location = $("#searchInput").val();
+        scrollToWikiArticle();
         runCode(location);
     }
 });
