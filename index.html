@@ -10,22 +10,29 @@
       href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>WikiGO</title>
 </head>
 
 <body>
     <header>
-        <h1>WikiGO</h1>
+        <div class="navbar-fixed">
+            <nav class="grey darken-3">
+              <div class="nav-wrapper">
+                <a href="#!" class="brand-logo" id="logo">WikiGO</a>
+              </div>
+            </nav>
+          </div>
     </header>
 
     <aside id="searchContainer">
         <input type="text" id="searchInput" placeholder="Search a Destination">
-        <button type="button" id="searchButton">Search</button>
+        <button type="button" class="btn waves-effect grey darken-2 btn-small" id="searchButton">Search</button>
         <hr />
         <p id="validity"></p>
         <ul id="searchHistory"></ul>
-        <button id="clearHistory">Clear History</button>
+        <button class="btn waves-effect grey darken-2 btn-small" id="clearHistory">Clear History</button>
     </aside>
 
     <section id="resultsContainer">
@@ -33,7 +40,7 @@
         <div id="map"></div>
     </section>
 
-    <footer>   
+    <footer class="page-footer grey darken-3">   
       <p>Copyright &copy; 2023 WikiGO.  <small>Created wit the effort of: <a href="https://github.com/jjocelynn" target="_blank">JOCELYN,</a> <a href="https://github.com/shaynefw" target="_blank">SHAYNE </a>and <a href="https://github.com/Ishaval" target="_blank">JULIAN</a>.</small></p>
     </footer>
     
