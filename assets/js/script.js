@@ -4,6 +4,46 @@ let coordinatesHistory = []; //saves searched location coordinates(to be used fo
 let existingValue = "false"; //verifies if user has already searched this term
 let marker = []; //array of pinpoint markers
 
+//when you click on the WikiGO logo it takes you to the top
+document.querySelector("header").addEventListener("click", function () {
+    window.scrollTo(0, 0);
+});
+
+//when you click on the search button or one of the searchHistory items it takes you to the wikiArticle
+
+
+
+function scrollToWikiArticle() {
+    const wikiArticle = document.getElementById("wikiArticle");
+    window.scrollTo({
+        top: wikiArticle.offsetTop,
+        behavior: "smooth"
+    });
+}
+
+
+//when you click on the WikiGO logo it takes you to the top
+document.querySelector("header").addEventListener("click", function () {
+    window.scrollTo(0, 0);
+});
+
+//when you click on the search button or one of the searchHistory items it takes you to the wikiArticle
+document.getElementById("searchButton").addEventListener("click", function () {
+    scrollToWikiArticle();
+});
+
+
+function scrollToWikiArticle() {
+    const wikiArticle = document.getElementById("wikiArticle");
+    window.scrollTo({
+        top: wikiArticle.offsetTop,
+        behavior: "smooth"
+    });
+}
+
+
+
+
 // on page load, get items from local storage and display as buttons
 $(function () {
     coordinatesHistory = JSON.parse(localStorage.getItem("coordinates")) || [];
@@ -16,11 +56,14 @@ $(function () {
 //when search button is clicked or enter key is pressed, assign the value to "location", and run the code
 $("#searchButton").click(function () {
     let location = $("#searchInput").val();
+    scrollToWikiArticle();
     runCode(location);
-})
+});
+
 $("#searchInput").on("keydown", function (event) {
     if (event.key == "Enter") { //checks if the key pressed is the enter key.
         let location = $("#searchInput").val();
+        scrollToWikiArticle();
         runCode(location);
     }
 });
