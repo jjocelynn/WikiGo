@@ -3,6 +3,29 @@ let searchHistory = []; //saves user search histroy(to be used for local storage
 let coordinatesHistory = []; //saves searched location coordinates(to be used for local storage)
 let existingValue = "false"; //verifies if user has already searched this term
 
+
+//when you click on the WikiGO logo it takes you to the top
+document.querySelector("header").addEventListener("click", function () {
+    window.scrollTo(0, 0);
+});
+
+//when you click on the search button or one of the searchHistory items it takes you to the wikiArticle
+document.getElementById("searchButton").addEventListener("click", function () {
+    scrollToWikiArticle();
+});
+
+
+function scrollToWikiArticle() {
+    const wikiArticle = document.getElementById("wikiArticle");
+    window.scrollTo({
+        top: wikiArticle.offsetTop,
+        behavior: "smooth"
+    });
+}
+
+
+
+
 // on page load, get items from local storage and display as buttons
 $(function () {
     coordinatesHistory = JSON.parse(localStorage.getItem("coordinates")) || [];
@@ -104,7 +127,7 @@ let mapCall = function (location) {
             }
 
             // //if value does not already exist, add it to coordinatesHistory array and save to local storage
-            if (existingValue == "false") { 
+            if (existingValue == "false") {
                 coordinatesHistory.push(coordinates);
                 localStorage.setItem("coordinates", JSON.stringify(coordinatesHistory));
             }
