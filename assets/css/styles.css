@@ -13,7 +13,7 @@ body {
 }
 
 header {
-  background-color: #333;
+  /* background-color: #333;  */
 }
 a:hover{
   transform: scale(1.1);
@@ -76,6 +76,11 @@ button:hover {
   align-content: center;
   border-radius: 10px;
   
+}
+
+.navbar-fixed nav {
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 
