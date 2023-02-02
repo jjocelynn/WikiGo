@@ -5,33 +5,88 @@
 
 /* footer section  */
 
+#map {
+  width: 75%;
+  height: 400px;
+  align-content: center;
+}
+
+body {
+  background-image: url("./giphy.gif");
+  background-size: 40em;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-color: #000000;
+  color: white;
+  
+}
+ 
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px;
+}
+
+header:hover{
+  transform: scale(1.2);
+  animation: ease .3s;
+  opacity: .7;
+}
+
+  
+
+aside#searchContainer {
+  width: 30%;
+  height: 50%;
+  margin: 300px auto 0;
+  text-align: center;
+  
+}
+input{
+  border-radius: 10px;
+  opacity: .5;
+}
+
+button {
+  background-color: lightgray;
+  border-radius: 10px;
+  border: none;
+  padding: 5px 10px;
+}
+
+button:hover {
+  transform: scale(1.5);
+  cursor: pointer;
+  animation: ease .3s;
+  opacity: .5;
+}
+
+
+
+#resultsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#wikiArticle {
+width: 70%;
+  margin: 23em 0 auto;
+}
+
+#map{
+  width: 70%;
+}
+
 footer {
+ 
+  bottom: 0;
+  width: 100%;
+  height: 50px; /* or any other desired height */
+  background-color: #333; /* or any other desired background color */
+  color: #fff; /* or any other desired text color */
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 50px;
-  background-color: #333;
-  color: #fff;
-}
-
-.github-logos {
-  display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-.github-logo {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-}
-
-.github-username {
-  display: none;
-}
-
-a:hover .github-username {
-  display: block;
-  color: rgb(0, 234, 255);
-  background-color: black;
 }
