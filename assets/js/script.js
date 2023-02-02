@@ -9,10 +9,6 @@ document.querySelector("header").addEventListener("click", function () {
     window.scrollTo(0, 0);
 });
 
-//when you click on the search button or one of the searchHistory items it takes you to the wikiArticle
-
-
-
 function scrollToWikiArticle() {
     const wikiArticle = document.getElementById("wikiArticle");
     window.scrollTo({
@@ -20,28 +16,6 @@ function scrollToWikiArticle() {
         behavior: "smooth"
     });
 }
-
-
-//when you click on the WikiGO logo it takes you to the top
-document.querySelector("header").addEventListener("click", function () {
-    window.scrollTo(0, 0);
-});
-
-//when you click on the search button or one of the searchHistory items it takes you to the wikiArticle
-document.getElementById("searchButton").addEventListener("click", function () {
-    scrollToWikiArticle();
-});
-
-
-function scrollToWikiArticle() {
-    const wikiArticle = document.getElementById("wikiArticle");
-    window.scrollTo({
-        top: wikiArticle.offsetTop,
-        behavior: "smooth"
-    });
-}
-
-
 
 
 // on page load, get items from local storage and display as buttons
@@ -191,5 +165,6 @@ $("#clearHistory").click(function () {
 //adding functionality to search history buttons
 $("#searchHistory").click(function (e) {
     let search = e.target.textContent;
+    scrollToWikiArticle();
     runCode(search);
 });
