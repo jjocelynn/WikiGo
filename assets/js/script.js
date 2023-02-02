@@ -57,7 +57,8 @@ $("#searchButton").click(function () {
     let location = $("#searchInput").val();
     scrollToWikiArticle();
     runCode(location);
-})
+});
+
 $("#searchInput").on("keydown", function (event) {
     if (event.key == "Enter") { //checks if the key pressed is the enter key.
         let location = $("#searchInput").val();
