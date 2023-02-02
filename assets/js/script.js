@@ -3,7 +3,6 @@ let searchHistory = []; //saves user search histroy(to be used for local storage
 let coordinatesHistory = []; //saves searched location coordinates(to be used for local storage)
 let existingValue = "false"; //verifies if user has already searched this term
 
-
 //when you click on the WikiGO logo it takes you to the top
 document.querySelector("header").addEventListener("click", function () {
     window.scrollTo(0, 0);
@@ -22,9 +21,6 @@ function scrollToWikiArticle() {
         behavior: "smooth"
     });
 }
-
-
-
 
 // on page load, get items from local storage and display as buttons
 $(function () {
