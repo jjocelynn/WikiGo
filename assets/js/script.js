@@ -136,7 +136,10 @@ let mapCall = function (location) {
 
             wikiCall(latitude, longitude); //calling the wiki article
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            console.error(error);
+            $("#wikiArticle").html("<p>No results found</p>");
+        }); // display error message to page if search is not found.
 }
 
 //function to display buttons
