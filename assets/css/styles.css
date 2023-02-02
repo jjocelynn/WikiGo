@@ -1,11 +1,10 @@
 
-
 body {
   background-image: url("./giphy.gif");
   background-size: 40em;
   background-position-x: center;
   background-repeat: no-repeat;
-  background-color: #000000;
+  background-color: #061113;
   color: white;
   display: flex;
   min-height: 100vh;
