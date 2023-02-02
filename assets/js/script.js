@@ -40,7 +40,7 @@ let runCode = function (location) {
 
 // wiki api call 
 let wikiCall = function (latitude, longitude) {
-    let apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=${latitude}%7C${longitude}&gsradius=5000&gslimit=1&format=json&origin=*`;//insert lat and lon from mapCall.
+    let apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=${latitude}%7C${longitude}&gsradius=5000&gslimit=10&format=json&origin=*`;//insert lat and lon from mapCall.
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {

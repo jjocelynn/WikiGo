@@ -2,6 +2,11 @@
 
 ## Description
 
+WikiGO is a JavaScript based web application that combines [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) and [Mapbox](https://www.mapbox.com/) API's. Together, a travel website is created that provides users with relevant information based on the location searched. WikiGO offers curious users a way to learn more about the history of a destination whilst being able to see exactly where it is on the interactive map below.
+
+what why and how
+
+
 A travel website that integrates Wikipedia and Google Maps to provide information and location details of tourist destinations. The user can search for a specific destination, view its Wikipedia article, and see its location on Google Maps.
 
 ## Table of Contents
@@ -16,6 +21,10 @@ A travel website that integrates Wikipedia and Google Maps to provide informatio
 What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
 
 ## Usage
+
+On page load, users are met with the WikiGO landing page. It features a clickable logo on the top left, an eye-catching display, and a search bar in the center. 
+
+Once the user enters a location, their search history is saved and will be displayed under the search bar. Users have the option to clear history which will wipe previous searches from their local storage and pinpoints on the map.
 
 Provide instructions and examples for use. Include screenshots as needed.
 
@@ -32,6 +41,8 @@ List your collaborators, if any, with links to their GitHub profiles.
 If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
 
 If you followed tutorials, include links to those here as well.
+
+https://codepen.io/Maximusssssu/pen/zYpZYZX?editors=1111
 
 ## License
 
@@ -77,3 +88,4 @@ N/A
 
 ## Tests
 N/A
+
