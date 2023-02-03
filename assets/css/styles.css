@@ -14,6 +14,17 @@ header {
   /* background-color: #333;  */
 }
 
+/* remove navbar background  */
+
+.navbar-fixed nav {
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.colorGo {
+  color: #9f714a;
+}
+
 a:hover {
   transform: scale(1.1);
   animation: ease 0.3s;
@@ -37,7 +48,7 @@ input {
 }
 
 button {
-  background-color: #757575;
+  background-color: #9f714a;
   border-radius: 10px;
   border: none;
   padding: 5px 10px;
@@ -47,6 +58,10 @@ button:hover {
   cursor: pointer;
   animation: ease 0.3s;
   opacity: 0.5;
+}
+
+.btn-small, .btn-small:focus, small:hover {
+  background-color: #9f714a;
 }
 
 #resultsContainer {
@@ -73,11 +88,13 @@ button:hover {
   border-radius: 10px;
 }
 
-/* remove navbar background  */
+footer {
+  text-align: center;
+  ;
+}
 
-.navbar-fixed nav {
-  box-shadow: none;
-  background-color: rgba(0, 0, 0, 0);
+.page-footer {
+  background-color: #9f714a
 }
 
 /* media queries  */
