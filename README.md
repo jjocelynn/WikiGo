@@ -12,6 +12,8 @@ https://jjocelynn.github.io/WikiGo/
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
+- [badges](#badges)
+- [features](#features)
 
 ## Usage
 
@@ -19,7 +21,7 @@ On page load, users are met with the WikiGO landing page. It features a clickabl
 
 Once the user enters a location, their search history is saved and will be displayed underneath the search bar. This action initiates an automatic scroll function that brings the user to the main page content where they can view the Wiki article and map.
 
-![WikiGO ](./assets/images/WikiGO-landing-page.jpg)
+![WikiGO landing page](./assets/images/WikiGO-landing-page.jpg)
 
 To use the map, users can click and drag to adjust location positioning and zoom in or out using the mouse's scroll wheel.
 Notice, pin-point markers are associated with each location saved in the search history. However, when the user presses the Clear History button, previous history,and pin-points are wiped. 
