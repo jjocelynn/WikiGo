@@ -64,13 +64,24 @@ SOFTWARE.
 
 ## Badges
 
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
+![MIT](https://img.shields.io/badge/License-MIT-gold)
+![HTML](https://img.shields.io/badge/HTML-17.5%25-blue)
+![CSS](https://img.shields.io/badge/CSS-17.8%25-skyblue)
+![JS](https://img.shields.io/badge/JavaScript-64.7%25-yellowblue)
 
 ## Features
 
-If your project has a lot of features, list them here.
+This website is a mapping application that allows users to search for locations, view them on a map, and save their search history for future reference. Some specific features include:
+
+- Search functionality: Users can search for a location using a text input and either clicking the search button or hitting the "Enter" key.
+
+- Map display: The search results are displayed on a Mapbox map, with the location marked by a pinpoint marker. The map also adjusts its size to fit the bounds of the search area and saves the pinpoints of previous searches.
+
+- Search history: The website keeps a record of the user's search history, which is stored in local storage and can be displayed as a list of buttons.
+
+- Clearing search history: Users can clear their entire search history by clicking the "clear history" button.
+
+- Scroll to article: The website also has a function that scrolls the page to the Wikipedia article associated with the location.
 
 ## Tests
 N/A
