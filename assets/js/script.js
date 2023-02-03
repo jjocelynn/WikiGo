@@ -4,21 +4,7 @@ let coordinatesHistory = []; //saves searched location coordinates(to be used fo
 let existingValue = "false"; //verifies if user has already searched this term
 let marker = []; //array of pinpoint markers
 
-//when you click on the WikiGO logo it takes you to the top
-document.querySelector("header").addEventListener("click", function () {
-    window.scrollTo(0, 0);
-});
-
-function scrollToWikiArticle() {
-    const wikiArticle = document.getElementById("wikiArticle");
-    window.scrollTo({
-        top: wikiArticle.offsetTop,
-        behavior: "smooth"
-    });
-}
-
-
-// on page load, get items from local storage and display as buttons
+// on page load, get items from local storage and display history
 $(function () {
     coordinatesHistory = JSON.parse(localStorage.getItem("coordinates")) || [];
     searchHistory = JSON.parse(localStorage.getItem("location")) || [];
@@ -27,23 +13,52 @@ $(function () {
     }
 })
 
-//when search button is clicked or enter key is pressed, assign the value to "location", and run the code
+//when you click on the WikiGO logo it takes you to the top
+document.querySelector("header").addEventListener("click", function () {
+    window.scrollTo(0, 0);
+});
+
+//when search button is clicked or enter key is pressed, assign the input value to "location", and call the functions
 $("#searchButton").click(function () {
     let location = $("#searchInput").val();
     scrollToWikiArticle();
-    runCode(location);
+    checkValue(location);
+    mapCall(location);
 });
-
 $("#searchInput").on("keydown", function (event) {
-    if (event.key == "Enter") { //checks if the key pressed is the enter key.
+    if (event.key == "Enter") { //checks if key press is the enter key.
         let location = $("#searchInput").val();
         scrollToWikiArticle();
-        runCode(location);
+        checkValue(location);
+        mapCall(location);
     }
 });
 
+//adding functionality to search history buttons
+$("#searchHistory").click(function (e) {
+    let search = e.target.textContent;
+    scrollToWikiArticle();
+    checkValue(search);
+    mapCall(search);
+});
+
+//clear history button (clears search history, coordinates, and markers)
+$("#clearHistory").click(function () {
+    searchHistory = [];
+    localStorage.setItem("location", JSON.stringify(searchHistory));
+    $("#searchHistory").text("");
+
+    coordinatesHistory = [];
+    localStorage.setItem("coordinates", JSON.stringify(coordinatesHistory));
+
+    for (let i = 0; i < marker.length; i++) {
+        marker[i].remove();
+    }
+    marker = [];
+})
+
 // checks if the location is already in searchHistory array. if not, add it to searchHistory, local storage, and create button.
-let runCode = function (location) {
+let checkValue = function (location) {
     if (searchHistory.includes(location)) {
         existingValue = "true"; //sets existingValue to true (location has been already been searched)
     } else {
@@ -52,7 +67,69 @@ let runCode = function (location) {
         localStorage.setItem("location", JSON.stringify(searchHistory));
         createButton(location);
     }
-    mapCall(location);
+}
+
+// Map API call
+let mapCall = function (location) {
+    let mapboxApiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${apiKey}`;
+
+    fetch(mapboxApiUrl)
+        .then(response => response.json())
+        .then(data => {
+            //saving latitude and longitude extracted from data 
+            let latitude = data.features[0].center[1];
+            let longitude = data.features[0].center[0];
+
+            mapboxgl.accessToken = apiKey; //access token
+
+            // Create a Mapbox map
+            const map = new mapboxgl.Map({
+                container: "map", // container ID
+                style: "mapbox://styles/mapbox/streets-v12", // style URL
+                center: [longitude, latitude], // starting position [lng, lat]
+                zoom: 15, // starting zoom
+            });
+
+            //Sizing the map appropriately
+            let keyName = Object.keys(data.features[0]); //getting an array of object key names
+
+            if (keyName.includes("bbox")) { //if there is bbox (bounding box), save the coordinates and scale map to fit
+                let southLat = data.features[0].bbox[0];
+                let westLon = data.features[0].bbox[1];
+                let northLat = data.features[0].bbox[2];
+                let eastLon = data.features[0].bbox[3];
+                map.fitBounds([[southLat, westLon], [northLat, eastLon]]); //setting map boundaries
+            }
+
+            // Creating a marker per area
+            //saving latitude and longitude to coordinates object
+            let coordinates = {
+                lat: latitude,
+                long: longitude
+            }
+
+            // //if value does not already exist, add it to coordinatesHistory array and save to local storage
+            if (existingValue == "false") {
+                coordinatesHistory.push(coordinates);
+                localStorage.setItem("coordinates", JSON.stringify(coordinatesHistory));
+            }
+
+            //creating pinpoints according to the lat and long stored in coordinatesHistory
+            for (let i = 0; i < coordinatesHistory.length; i++) {
+                pinPoint = new mapboxgl.Marker({})
+                    .setLngLat([coordinatesHistory[i].long, coordinatesHistory[i].lat])
+                    .addTo(map);
+                marker.push(pinPoint); //adding the pinpoint to marker array
+            }
+
+            wikiCall(latitude, longitude); //calling the wiki article and use the latitude and longitude for parameters
+        })
+
+        // display error message to page if search is not found.
+        .catch(error => {
+            console.error(error);
+            $("#wikiArticle").html("<p>No results found</p>");
+        });
 }
 
 // wiki api call 
@@ -82,66 +159,6 @@ let wikiCall = function (latitude, longitude) {
         })
 }
 
-// Map API call
-let mapCall = function (location) {
-    let mapboxApiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${apiKey}`;
-
-    fetch(mapboxApiUrl)
-        .then(response => response.json())
-        .then(data => {
-            let latitude = data.features[0].center[1];
-            let longitude = data.features[0].center[0];
-
-            // Create a Mapbox map
-            mapboxgl.accessToken = apiKey;
-
-            const map = new mapboxgl.Map({
-                container: "map", // container ID
-                style: "mapbox://styles/mapbox/streets-v12", // style URL
-                center: [longitude, latitude], // starting position [lng, lat]
-                zoom: 15, // starting zoom
-            });
-
-            //Sizing the scale appropriately
-            let keyName = Object.keys(data.features[0]); //getting an array of object key names
-
-            if (keyName.includes("bbox")) { //checks if there is bbox (bounding box)
-                let southLat = data.features[0].bbox[0];
-                let westLon = data.features[0].bbox[1];
-                let northLat = data.features[0].bbox[2];
-                let eastLon = data.features[0].bbox[3];
-                map.fitBounds([[southLat, westLon], [northLat, eastLon]]); //setting map boundaries
-            }
-
-            // Creating a marker per area
-            //saving latitude and longitude to coordinates object
-            let coordinates = {
-                lat: latitude,
-                long: longitude
-            }
-
-            // //if value does not already exist, add it to coordinatesHistory array and save to local storage
-            if (existingValue == "false") {
-                coordinatesHistory.push(coordinates);
-                localStorage.setItem("coordinates", JSON.stringify(coordinatesHistory));
-            }
-
-            //creating pinpoints according to the lat and long stored in coordinatesHistory
-            for (let i = 0; i < coordinatesHistory.length; i++) {
-                pinPoint = new mapboxgl.Marker({})
-                    .setLngLat([coordinatesHistory[i].long, coordinatesHistory[i].lat])
-                    .addTo(map);
-                marker.push(pinPoint); //adding the pinpoint to marker array
-            }
-
-            wikiCall(latitude, longitude); //calling the wiki article
-        })
-        .catch(error => {
-            console.error(error);
-            $("#wikiArticle").html("<p>No results found</p>");
-        }); // display error message to page if search is not found.
-}
-
 //function to display buttons
 let createButton = function (locationBtn) {
     let button = document.createElement("button");
@@ -149,24 +166,11 @@ let createButton = function (locationBtn) {
     $("#searchHistory").append(button);
 }
 
-//clear history button (clears search history, coordinates, and markers)
-$("#clearHistory").click(function () {
-    searchHistory = [];
-    localStorage.setItem("location", JSON.stringify(searchHistory));
-    $("#searchHistory").text("");
-
-    coordinatesHistory = [];
-    localStorage.setItem("coordinates", JSON.stringify(coordinatesHistory));
-
-    for (let i = 0; i < marker.length; i++) {
-        marker[i].remove();
-    }
-    marker = [];
-})
-
-//adding functionality to search history buttons
-$("#searchHistory").click(function (e) {
-    let search = e.target.textContent;
-    scrollToWikiArticle();
-    runCode(search);
-});
+//function that brings you to the wikiArticle.
+function scrollToWikiArticle() {
+    const wikiArticle = document.getElementById("wikiArticle");
+    window.scrollTo({
+        top: wikiArticle.offsetTop,
+        behavior: "smooth"
+    });
+}

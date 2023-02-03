@@ -6,44 +6,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>WikiGO</title>
 </head>
 
 <body>
+    <!-- header -->
     <header>
         <div class="navbar-fixed">
-            <nav class="">
-              <div class="nav-wrapper">
+            <nav>
                 <a href="#!" class="brand-logo" id="logo">Wiki<span class="colorGo">GO</span></a>
-              </div>
             </nav>
-          </div>
+        </div>
     </header>
 
-    <aside id="searchContainer">
-        <input type="text" id="searchInput" placeholder="Search a Destination">
-        <button type="button" class="btn waves-effect btn-small" id="searchButton">Search</button>
+    <!-- Search bar and history-->
+    <section id="searchContainer">
+        <input id="searchInput" placeholder="Search a Destination">
+        <button type="button" class="btn waves-effect btn-small customShadow" id="searchButton">Search</button>
         <hr />
-        <p id="validity"></p>
         <ul id="searchHistory"></ul>
-        <button class="btn waves-effect btn-small" id="clearHistory">Clear History</button>
-    </aside>
+        <button class="btn waves-effect btn-small customShadow" id="clearHistory">Clear History</button>
+    </section>
 
+    <!-- Results (article and map) -->
     <section id="resultsContainer">
         <div id="wikiArticle"></div>
         <div id="map"></div>
     </section>
 
-    <footer class="page-footer">   
-      <p>Copyright &copy; 2023 WikiGO.  <small>Created wit the effort of: <a href="https://github.com/jjocelynn" target="_blank">JOCELYN,</a> <a href="https://github.com/shaynefw" target="_blank">SHAYNE </a>and <a href="https://github.com/Ishaval" target="_blank">JULIAN</a>.</small></p>
+    <!-- footer -->
+    <footer class="page-footer">
+        <p>Copyright &copy; 2023 WikiGO. <small>Created wit the effort of: <a href="https://github.com/jjocelynn"
+                    target="_blank">JOCELYN,</a> <a href="https://github.com/shaynefw" target="_blank">SHAYNE </a>and <a
+                    href="https://github.com/Ishaval" target="_blank">JULIAN</a>.</small></p>
     </footer>
-    
+
     <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
