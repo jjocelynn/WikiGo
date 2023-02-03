@@ -24,9 +24,8 @@ To use the map, users can click and drag to adjust the location and zoom in or o
 
 Users have the option to clear history which will wipe previous searches from their local storage and pinpoints from the map.
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+--------------------
+![image](./assets/images/jjocelynn.github.io_WikiGo_.png)
 
 ## Credits
 
