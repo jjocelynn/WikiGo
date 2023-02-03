@@ -1,6 +1,5 @@
-
 body {
-  background-image: url("../images/giphy.gif");
+  background-image: url('../images/giphy.gif');
   background-size: 40em;
   background-position-x: center;
   background-repeat: no-repeat;
@@ -9,40 +8,36 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  
 }
 
 header {
   /* background-color: #333;  */
 }
-a:hover{
+
+a:hover {
   transform: scale(1.1);
-  animation: ease .3s;
-  opacity: .6;
+  animation: ease 0.3s;
+  opacity: 0.6;
 }
-#logo{
+
+#logo {
   padding-left: 1em;
 }
-
-
-
-  
 
 aside#searchContainer {
   width: 30%;
   height: 50%;
   margin: 300px auto 0;
   text-align: center;
-  
 }
-input{
+
+input {
   border-radius: 10px;
   color: white;
-  
 }
 
 button {
-  background-color:#757575;
+  background-color: #757575;
   border-radius: 10px;
   border: none;
   padding: 5px 10px;
@@ -50,11 +45,9 @@ button {
 
 button:hover {
   cursor: pointer;
-  animation: ease .3s;
-  opacity: .5;
+  animation: ease 0.3s;
+  opacity: 0.5;
 }
-
-
 
 #resultsContainer {
   display: flex;
@@ -65,9 +58,12 @@ button:hover {
 }
 
 #wikiArticle {
-  
   margin: 23em 0 auto;
   margin-bottom: 3em;
+}
+
+#wikiArticle::-webkit-scrollbar {
+  display: none;
 }
 
 #map {
@@ -75,18 +71,19 @@ button:hover {
   height: 400px;
   align-content: center;
   border-radius: 10px;
-  
 }
+
+/* remove navbar background  */
 
 .navbar-fixed nav {
   box-shadow: none;
   background-color: rgba(0, 0, 0, 0);
 }
 
+/* media queries  */
 
 @media (max-width: 550px) {
- 
-  body{
+  body {
     background-size: 90%;
     background-position-x: center;
   }
