@@ -12,6 +12,8 @@ https://jjocelynn.github.io/WikiGo/
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
+- [badges](#badges)
+- [features](#features)
 
 ## Usage
 
@@ -19,21 +21,24 @@ On page load, users are met with the WikiGO landing page. It features a clickabl
 
 Once the user enters a location, their search history is saved and will be displayed underneath the search bar. This action initiates an automatic scroll function that brings the user to the main page content where they can view the Wiki article and map.
 
-Notice a pin-point marker is placed at every location in the search history.
-To use the map, users can click and drag to adjust the location and zoom in or out using their mouse's scroll wheel.
+![WikiGO landing page](./assets/images/WikiGO-landing-page.jpg)
 
-Users have the option to clear history which will wipe previous searches from their local storage and pinpoints from the map.
+To use the map, users can click and drag to adjust location positioning and zoom in or out using the mouse's scroll wheel.
+Notice, pin-point markers are associated with each location saved in the search history. However, when the user presses the Clear History button, previous history,and pin-points are wiped. 
 
---------------------
-![image](./assets/images/jjocelynn.github.io_WikiGo_.png)
+![WikiGo main article and map](./assets/images/WikiGO-main-content.jpg)
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
 Map pin-point example: https://codepen.io/Maximusssssu/pen/zYpZYZX?editors=1111
+
+MediaWiki API: https://www.mediawiki.org/wiki/API:Main_page
+
+Mapbox API: https://docs.mapbox.com/
+
+
+Materialize framework: https://materializecss.com/
+
 
 ## License
 
@@ -64,8 +69,11 @@ SOFTWARE.
 ## Badges
 
 ![MIT](https://img.shields.io/badge/License-MIT-gold)
+
 ![HTML](https://img.shields.io/badge/HTML-17.5%25-blue)
+
 ![CSS](https://img.shields.io/badge/CSS-17.8%25-skyblue)
+
 ![JS](https://img.shields.io/badge/JavaScript-64.7%25-yellowblue)
 
 ## Features
@@ -82,6 +90,7 @@ This website is a mapping application that allows users to search for locations,
 
 - Scroll to article: The website also has a function that scrolls the page to the Wikipedia article associated with the location.
 
-## Tests
-N/A
+- Hover: Users can hover over clickable areas and the opacity/color will change, intuitively letting them know it is functional
+
+- Article scroll: If the wiki article exceeds the text box size, users can scroll to read more.
 
