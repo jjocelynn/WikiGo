@@ -27,6 +27,8 @@ body {
   padding-left: 1em;
   padding-top: 0.3em;
   font-size: 250%;
+  background-color: #061113;
+  border-radius: 1em;
 }
 
 a:hover {

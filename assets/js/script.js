@@ -21,6 +21,7 @@ document.querySelector("header").addEventListener("click", function () {
 //when search button is clicked or enter key is pressed, assign the input value to "location", and call the functions
 $("#searchButton").click(function () {
     let location = $("#searchInput").val();
+    document.querySelector("#searchInput").value = "";
     scrollToWikiArticle();
     checkValue(location);
     mapCall(location);
@@ -28,6 +29,7 @@ $("#searchButton").click(function () {
 $("#searchInput").on("keydown", function (event) {
     if (event.key == "Enter") { //checks if key press is the enter key.
         let location = $("#searchInput").val();
+        document.querySelector("#searchInput").value = "";
         scrollToWikiArticle();
         checkValue(location);
         mapCall(location);
