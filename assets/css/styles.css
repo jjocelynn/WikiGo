@@ -2,6 +2,7 @@ body {
   background-image: url('../images/giphy.gif');
   background-size: 40em;
   background-position-x: center;
+ background-position-y: 50px;
   background-repeat: no-repeat;
   background-color: #061113;
   color: white;
@@ -33,31 +34,58 @@ a:hover {
 
 #logo {
   padding-left: 1em;
+  padding-top: 0.3em;
+  font-size: 250%;
 }
 
 aside#searchContainer {
-  width: 30%;
+  width: 430px;
   height: 50%;
-  margin: 300px auto 0;
+  margin: 320px auto 0;
   text-align: center;
 }
 
-input {
-  border-radius: 10px;
-  color: white;
+#searchInput, hr{
+  box-shadow: 0px 0px 30px #061113;
+}
+
+button, .customShadow {
+box-shadow: 0px 0px 10px 1px #061113;
+}
+
+#searchInput {
+  border-radius: 2px;
+  color: black;
+  background-color:rgba(255,255,255, 0.6);
+  padding-left: 20px;
+  
+}
+
+::placeholder {
+  color: black;
+}
+
+#searchInput:focus,
+#searchInput:hover {
+  animation: ease .3s;
+  background-color: rgba(255, 255, 255, 1);
 }
 
 button {
-  background-color: #9f714a;
+  background-color: rgba(159, 113, 74, 0.8);
+  color: white;
   border-radius: 10px;
   border: none;
-  padding: 5px 10px;
+  padding: 7px 14px;
+  margin: 3px;
 }
 
 button:hover {
+  background-color:#0ABAB5;
+  color:black;
   cursor: pointer;
   animation: ease 0.3s;
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .btn-small, .btn-small:focus, small:hover {
@@ -68,7 +96,8 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 5em;
+  padding-bottom: 10em;
+  padding-top: 4em;
   min-width: 100%;
 }
 

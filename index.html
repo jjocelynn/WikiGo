@@ -6,10 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>WikiGO</title>
@@ -27,12 +23,12 @@
     </header>
 
     <aside id="searchContainer">
-        <input type="text" id="searchInput" placeholder="Search a Destination">
-        <button type="button" class="btn waves-effect btn-small" id="searchButton">Search</button>
+        <input id="searchInput" placeholder="Search a Destination">
+        <button type="button" class="btn waves-effect btn-small customShadow" id="searchButton">Search</button>
         <hr />
         <p id="validity"></p>
         <ul id="searchHistory"></ul>
-        <button class="btn waves-effect btn-small" id="clearHistory">Clear History</button>
+        <button class="btn waves-effect btn-small customShadow" id="clearHistory">Clear History</button>
     </aside>
 
     <section id="resultsContainer">
